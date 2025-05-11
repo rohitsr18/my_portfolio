@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rohit Raj | Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <!-- End Google Analytics -->
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Rohit<span>Raj</span></div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <section class="hero">
+      <h1>Hi, I'm <span>Rohit</span></h1>
+      <p>Crafting elegant solutions with code.</p>
+      <a href="#projects" class="btn">Explore Projects</a>
+    </section>
+  </header>
+
+  <main>
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p>
+        I’m a software engineer with a flair for crafting clean, scalable, and efficient web experiences.
+      </p>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Notely</h3>
+          <p>Minimal note-taking app with dark mode and cloud sync. Built with React and Firebase.</p>
+        </div>
+        <div class="project-card">
+          <h3>DevWeather</h3>
+          <p>Live weather dashboard using OpenWeatherMap API and JavaScript.</p>
+        </div>
+        <div class="project-card">
+          <h3>CodeVault</h3>
+          <p>Secure code snippet manager built with Node.js and MongoDB.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <ul class="skills-list">
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>TypeScript</li>
+        <li>Node.js</li>
+        <li>Python</li>
+        <li>Git & GitHub</li>
+        <li>HTML5</li>
+        <li>CSS3</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact Me</h2>
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Rohit Raj | Built with 💻 and ☕</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

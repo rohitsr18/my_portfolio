@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Fira Code', monospace;
+  background: linear-gradient(to bottom right, #f0f0f0, #e8e8ff);
+  color: #222;
+}
+
+header {
+  background: #1e1e2f;
+  color: #fff;
+  padding-bottom: 2rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #61dafb;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #61dafb;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+.hero h1 span {
+  color: #61dafb;
+}
+
+.hero p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+.btn {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: #61dafb;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.section {
+  padding: 4rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.skills-list li {
+  background: #d1d1f0;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+input, textarea {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #f1f1f1;
+}
