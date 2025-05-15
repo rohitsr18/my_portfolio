@@ -77,6 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   fetchLeetCodeStats(leetcodeUsername);
+
+  fetch('about.json')
+    .then(response => response.json())
+    .then(data => {
+      const aboutText = document.getElementById('about-text');
+      aboutText.textContent = data.about;
+    })
+    .catch(error => {
+      console.error("Error loading About section:", error);
+      document.getElementById('about-text').textContent = "Unable to load About section at this time.";
+    });
 });
 
 window.addEventListener("scroll", () => {
@@ -93,4 +104,6 @@ window.addEventListener("scroll", () => {
     body.style.background = "linear-gradient(to bottom right,rgba(139, 168, 211, 0.35),rgb(211, 176, 176))";
   }
 });
+
+
 

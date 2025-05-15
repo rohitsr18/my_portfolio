@@ -356,3 +356,8 @@ footer {
   margin-bottom: 1rem;
 
 }
+
+#about-text {
+  text-align: left;
+  margin-left: 0;
+}
