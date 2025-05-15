@@ -13,7 +13,6 @@ body {
   background: linear-gradient(to bottom right, #f0f0f0, #e8e8ff);
   color: #222;
   transition: background .00001s ease-in-out;
-  /* transition: background-color 1s ease; */
 }
 
 header {
@@ -27,6 +26,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+  position: relative;
 }
 
 .logo {
@@ -52,6 +52,34 @@ nav {
 
 .nav-links a:hover {
   color: #61dafb;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 .hero {
@@ -112,7 +140,6 @@ nav {
   display: inline-block;
 }
 
-
 .btn {
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
@@ -146,17 +173,17 @@ nav {
   border-radius: 20px;
 }
 
+/* Updated responsive contact details */
 .contact-details {
-  max-width: 400px;
-  margin-top: 1rem;
-  text-align: left;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  /* border: 1px solid #ccc; */
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto;
   padding: 1rem 1.5rem;
   border-radius: 8px;
   color: #000;
-  /* background: #f9f9f9; */
+  font-size: 1.1rem;
+  line-height: 1.8;
+  box-sizing: border-box;
 }
 
 .contact-details p {
@@ -166,13 +193,7 @@ nav {
 .contact-details strong {
   display: inline-block;
   width: 90px;
-  /* fixed width for labels */
 }
-
-/* .contact-details {
-  
-  padding-left: 2rem;
-} */
 
 .contact-details a {
   color: #000;
@@ -182,8 +203,6 @@ nav {
 .contact-details a:hover {
   text-decoration: underline;
 }
-
-
 
 footer {
   text-align: center;
@@ -197,7 +216,6 @@ footer {
 
 #profiles h2 {
   margin-bottom: 1rem;
-
 }
 
 .profiles-horizontal {
@@ -205,7 +223,6 @@ footer {
   gap: 1.5rem;
   flex-wrap: wrap;
   margin-top: 1rem;
-
 }
 
 .profile-card {
@@ -216,7 +233,6 @@ footer {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-
 
 .profile-card:hover {
   transform: translateY(-5px);
@@ -285,11 +301,9 @@ footer {
 .project-card .stars {
   font-weight: bold;
   color: #f5a623;
-  /* Gold star color */
   font-size: 1rem;
 }
 
-/* Slider buttons */
 .slider-btn {
   position: absolute;
   top: 50%;
@@ -317,7 +331,6 @@ footer {
   right: 1rem;
 }
 
-/* Container to position buttons */
 .projects-slider-container {
   position: relative;
   width: 100%;
@@ -348,17 +361,55 @@ footer {
   color: #555;
 }
 
-#resume h2 {
-  margin-bottom: 1rem;
-
-}
-
+#resume h2,
 #about h2 {
   margin-bottom: 1rem;
-
 }
 
 #about-text {
   text-align: left;
   margin-left: 0;
+}
+
+/* ============================
+   Responsive Styles (Mobile)
+   ============================ */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 60%;
+    background-color: #1e1e2f;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4rem 2rem;
+    gap: 1.5rem;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    width: 100%;
+    display: block;
+    font-size: 1.2rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .contact-details {
+    padding: 1rem;
+    font-size: 1rem;
+  }
 }
