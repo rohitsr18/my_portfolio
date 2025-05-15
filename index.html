@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rohit Raj | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-  <!-- End Google Analytics -->
+  <script src="script.js"></script>
 </head>
+
 <body>
   <header>
     <nav>
@@ -25,71 +18,103 @@
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="https://www.linkedin.com/in/rohitsr">LinkedIn</a></li>
+        <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
     <section class="hero">
+  <div class="hero-content">
+    <div class="hero-image-container">
+      <img src="rohit.jpg" alt="Rohit Raj" class="hero-image" />
+    </div>
+    <div class="hero-text">
       <h1>Hi, I'm <span>Rohit</span></h1>
       <p>Crafting elegant solutions with code.</p>
-      <a href="#projects" class="btn">Explore Projects</a>
-    </section>
+      <a href="https://github.com/rohitsr24?tab=repositories" class="btn" target="_blank">Explore Projects</a>
+    </div>
+  </div>
+</section>
+
+
   </header>
 
   <main>
     <section id="about" class="section">
       <h2>About Me</h2>
-      <p>
-        I’m a software engineer with a flair for crafting clean, scalable, and efficient web experiences.
-      </p>
+      <p>Experienced Software Engineer at Wipro Limited with expertise in Java, Data Structures, Algorithms, and Web
+        Development. Known for delivering high-quality code, problem-solving, and strong collaborative skills.
+        Recognized for outperforming peers by clinching the Google India Challenge Scholarship in 2018, selected from
+        10K+ applicants. Eager to leverage skills in software development to drive impactful contributions in a dynamic
+        environment.</p>
     </section>
 
     <section id="projects" class="section">
       <h2>Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Notely</h3>
-          <p>Minimal note-taking app with dark mode and cloud sync. Built with React and Firebase.</p>
+      <div class="projects-slider-container">
+        <button class="slider-btn left" aria-label="Scroll left">&lt;</button>
+        <div class="projects-slider" id="projects-slider">
+          <p>Loading projects...</p>
         </div>
-        <div class="project-card">
-          <h3>DevWeather</h3>
-          <p>Live weather dashboard using OpenWeatherMap API and JavaScript.</p>
-        </div>
-        <div class="project-card">
-          <h3>CodeVault</h3>
-          <p>Secure code snippet manager built with Node.js and MongoDB.</p>
-        </div>
+        <button class="slider-btn right" aria-label="Scroll right">&gt;</button>
       </div>
     </section>
+
+
+    <section id="profiles" class="section">
+      <h2>Profiles</h2>
+      <!-- <div class="profiles-horizontal">
+        <div class="profile-card">
+          <h3>LinkedIn</h3>
+          <p><a href="https://www.linkedin.com/in/rohitsr" target="_blank">View Profile</a></p>
+        </div> -->
+      <div class="profile-card leetcode-card" id="leetcode-stats">
+        <h3>LeetCode</h3>
+        <p>Loading LeetCode stats...</p>
+      </div>
+      </div>
+    </section>
+
+
 
     <section id="skills" class="section">
       <h2>Skills</h2>
       <ul class="skills-list">
-        <li>JavaScript</li>
-        <li>React</li>
-        <li>TypeScript</li>
-        <li>Node.js</li>
-        <li>Python</li>
-        <li>Git & GitHub</li>
+        <li>Java</li>
+        <li>Spring Boot</li>
+        <li>Microservices</li>
+        <li>Hibernate</li>
+        <li>RESTful APIs</li>
+        <li>MySQL</li>
         <li>HTML5</li>
         <li>CSS3</li>
+        <li>CI/CD</li>
+        <li>Git & GitHub</li>
       </ul>
     </section>
 
-    <section id="contact" class="section">
-      <h2>Contact Me</h2>
-      <form id="contact-form">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-      </form>
+    <section id="resume" class="section">
+      <h2>My Resume</h2>
+      <iframe src="resume_Rohit_Raj.pdf" width="100%" height="500px" style="border:1px solid #ccc;"></iframe>
+      <br />
     </section>
+
+    <section id="contact" class="section">
+  <h2>Contact Details</h2>
+  <div class="contact-details">
+    <p><strong>Email:</strong> <a href="mailto:rohitraj9679@gmail.com">rohitraj9679@gmail.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel:+919647718064">+919647718064</a></p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/rohitsr" target="_blank">linkedin.com/in/rohitsr</a></p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/rohitsr24" target="_blank">github.com/rohitsr24</a></p>
+  </div>
+</section>
+
   </main>
 
   <footer>
     <p>© 2025 Rohit Raj | Built with 💻 and ☕</p>
   </footer>
 
-  <script src="script.js"></script>
 </body>
+
 </html>
