@@ -95,11 +95,11 @@ window.addEventListener("scroll", () => {
   const body = document.body;
 
   if (scrollY < 300) {
-    body.style.background = "linear-gradient(to bottom right, #f0f0f0, #e8e8ff)";
+    body.style.background = "linear-gradient(to bottom right, rgba(139, 168, 211, 0.35),rgb(211, 176, 176))";
   } else if (scrollY >= 300 && scrollY < 800) {
-    body.style.background = "linear-gradient(to bottom right, #ffe0e0,rgb(196, 168, 168))";
+    body.style.background = "linear-gradient(to bottom right, rgba(139, 168, 211, 0.35),rgb(211, 176, 176))";
   } else if (scrollY >= 800 && scrollY < 1400) {
-    body.style.background = "linear-gradient(to bottom right,rgb(188, 212, 188),rgba(184, 206, 191, 0.96))";
+    body.style.background = "linear-gradient(to bottom right,rgba(139, 168, 211, 0.35),rgb(211, 176, 176))";
   } else {
     body.style.background = "linear-gradient(to bottom right,rgba(139, 168, 211, 0.35),rgb(211, 176, 176))";
   }
