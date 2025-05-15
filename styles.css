@@ -4,11 +4,16 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Fira Code', monospace;
   background: linear-gradient(to bottom right, #f0f0f0, #e8e8ff);
   color: #222;
-  transition: background 0.8s ease-in-out;
+  transition: background .00001s ease-in-out;
+  /* transition: background-color 1s ease; */
 }
 
 header {
