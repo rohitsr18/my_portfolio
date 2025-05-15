@@ -1,8 +1,4 @@
-# Create a merged CSS file by appending the responsive iframe styles to the user's provided CSS
-
-
-base_css="" "
- * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -16,7 +12,7 @@ body {
   font-family: 'Fira Code', monospace;
   background: linear-gradient(to bottom right, #f0f0f0, #e8e8ff);
   color: #222;
-  transition: background .00001s ease-in-out;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 header {
@@ -58,7 +54,6 @@ nav {
   color: #61dafb;
 }
 
-/* Hamburger Menu */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -163,6 +158,18 @@ nav {
   margin: auto;
 }
 
+/* Animate on scroll */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .skills-list {
   display: flex;
   flex-wrap: wrap;
@@ -177,36 +184,67 @@ nav {
   border-radius: 20px;
 }
 
-/* Updated responsive contact details */
+.contact-section {
+  background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #1e1e2f;
+}
+
 .contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: white;
   width: 100%;
   max-width: 600px;
-  margin: 1rem 0 1rem 0rem;
-  padding: 0rem 1rem;
-  border-radius: 8px;
-  color: #000;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  color: #333;
   font-size: 1.1rem;
   line-height: 1.8;
   box-sizing: border-box;
-  text-align: left;
 }
 
 .contact-details p {
-  margin: .5rem 0;
+  width: 100%;
+  margin: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .contact-details strong {
-  display: inline-block;
-  width: 90px;
+  min-width: 90px;
+  font-weight: 600;
+  color: #007acc;
+  flex-shrink: 0;
 }
 
 .contact-details a {
-  color: #000;
+  color: #007acc;
   text-decoration: none;
+  word-break: break-word;
+  flex: 1;
+  transition: color 0.3s ease;
 }
 
 .contact-details a:hover {
+  color: #005a99;
   text-decoration: underline;
+}
+
+.contact-icon {
+  font-size: 1.2rem;
+  color: #007acc;
 }
 
 footer {
@@ -221,6 +259,7 @@ footer {
 
 #profiles h2 {
   margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
 .profiles-horizontal {
@@ -237,6 +276,7 @@ footer {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-card:hover {
@@ -367,8 +407,11 @@ footer {
 }
 
 #resume h2,
-#about h2 {
+#about h2, #projects h2, #skills h2, #profiles h2 {
   margin-bottom: 1rem;
+  font-size: 1.6rem;
+  text-align: center;
+  color: #1e1e2f;
 }
 
 #about-text {
@@ -376,9 +419,6 @@ footer {
   margin-left: 0;
 }
 
-/* ============================
-   Responsive Styles (Mobile)
-   ============================ */
 @media (max-width: 768px) {
   .nav-links {
     position: fixed;
@@ -436,4 +476,14 @@ footer {
   width: 100%;
   height: 100%;
   border: none;
+}
+@media (max-width: 500px) {
+  .contact-details {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .contact-details strong {
+    min-width: 80px;
+  }
 }

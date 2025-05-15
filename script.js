@@ -103,6 +103,19 @@ window.addEventListener("scroll", () => {
   } else {
     body.style.background = "linear-gradient(to bottom right,rgba(139, 168, 211, 0.35),rgb(211, 176, 176))";
   }
+  // SCROLL ANIMATIONS
+  const animateOnScroll = () => {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', animateOnScroll);
+  window.addEventListener('DOMContentLoaded', animateOnScroll);
 });
 
 const hamburger = document.querySelector('.hamburger');
@@ -119,5 +132,3 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     hamburger.classList.remove('open');
   });
 });
-
-
