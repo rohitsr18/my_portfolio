@@ -165,7 +165,8 @@ nav {
 
 .contact-details strong {
   display: inline-block;
-  width: 90px; /* fixed width for labels */
+  width: 90px;
+  /* fixed width for labels */
 }
 
 /* .contact-details {
