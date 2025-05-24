@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const slider = document.getElementById('projects-slider');
   const btnLeft = document.querySelector('.slider-btn.left');
   const btnRight = document.querySelector('.slider-btn.right');
-  const username = 'rohitsr24'; // Replace this
+  const username = 'rohitsr18'; // Replace this
 
   btnLeft.addEventListener('click', () => {
     slider.scrollBy({ left: -300, behavior: 'smooth' });
