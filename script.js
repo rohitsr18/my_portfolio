@@ -13,28 +13,33 @@ document.addEventListener('DOMContentLoaded', () => {
     slider.scrollBy({ left: 300, behavior: 'smooth' });
   });
 
-  // Fetch GitHub repos
+  // Fetch GitHub repos and show most recently committed first
   async function fetchRepos() {
     try {
-      const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+      const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`);
       if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
       const repos = await res.json();
-      const popularRepos = repos.filter(repo => repo.stargazers_count >= 1);
 
-      if (popularRepos.length === 0) {
+      // Filter repos with at least 1 star and sort by most recent commit
+      const starredRepos = repos
+        .filter(repo => repo.stargazers_count >= 1)
+        .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+
+      if (starredRepos.length === 0) {
         slider.innerHTML = `<p>No starred repositories found.</p>`;
         return;
       }
 
       slider.innerHTML = '';
 
-      popularRepos.forEach(repo => {
+      starredRepos.forEach(repo => {
         const projectCard = document.createElement('div');
         projectCard.className = 'project-card';
         projectCard.innerHTML = `
-          <h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
-          <p>${repo.description || 'No description'}</p>
+          <h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${escapeHTML(repo.name)}</a></h3>
+          <p>${repo.description ? escapeHTML(repo.description) : 'No description'}</p>
           <div class="stars">⭐ ${repo.stargazers_count}</div>
+          <div class="last-commit">Last commit: ${new Date(repo.pushed_at).toLocaleDateString()}</div>
         `;
         slider.appendChild(projectCard);
       });
@@ -42,6 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
       slider.innerHTML = `<p>Error fetching projects: ${err.message}</p>`;
     }
   }
+
+  // Escape HTML utility to prevent XSS
+  function escapeHTML(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
   fetchRepos();
 
   // Fetch LeetCode stats
@@ -58,12 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       document.getElementById("leetcode-stats").innerHTML = `
-        <a href="https://leetcode.com/${username}" target="_blank" class="leetcode-card-link">
+        <a href="https://leetcode.com/${escapeHTML(username)}" target="_blank" class="leetcode-card-link" rel="noopener noreferrer">
           <h3>LeetCode</h3>
-          <p>User: <strong>${username}</strong></p>
-          <p>Total Problems Solved: <strong>${data.totalSolved}</strong></p>
-          <p>Ranking: <strong>${data.ranking}</strong></p>
-          <p>Acceptance Rate: <strong>${data.acceptanceRate}</strong></p>
+          <p>User: <strong>${escapeHTML(username)}</strong></p>
+          <p>Total Problems Solved: <strong>${escapeHTML(data.totalSolved)}</strong></p>
+          <p>Ranking: <strong>${escapeHTML(data.ranking)}</strong></p>
+          <p>Acceptance Rate: <strong>${escapeHTML(data.acceptanceRate)}</strong></p>
           <p class="click-note">Click to view full profile</p>
         </a>
       `;
