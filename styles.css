@@ -358,11 +358,11 @@ footer {
 }
 
 .slider-btn.left {
-  left: 1rem;
+  left: -0.8rem;
 }
 
 .slider-btn.right {
-  right: 1rem;
+  right: -0.8rem;
 }
 
 .projects-slider-container {
@@ -406,6 +406,14 @@ footer {
 #about-text {
   text-align: left;
   margin-left: 0;
+}
+
+.centered-error {
+  text-align: center;
+  color: #c0392b;
+  font-weight: bold;
+  margin: 2rem auto;
+  display: block;
 }
 
 @media (max-width: 768px) {

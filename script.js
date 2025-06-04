@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
 
       if (starredRepos.length === 0) {
-        slider.innerHTML = `<p>No starred repositories found.</p>`;
+        slider.innerHTML = `<p class="centered-error">No starred repositories found.</p>`;
         return;
       }
 
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         slider.appendChild(projectCard);
       });
     } catch (err) {
-      slider.innerHTML = `<p>Error fetching projects: ${err.message}</p>`;
+      slider.innerHTML = `<p class="centered-error">Error fetching projects: ${err.message}</p>`;
     }
   }
 
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (data.status === "error") {
-        document.getElementById("leetcode-stats").innerText = "LeetCode profile not found or API error.";
+        document.getElementById("leetcode-stats").innerHTML = `<p class="centered-error">LeetCode profile not found or API error.</p>`;
         return;
       }
 
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </a>
       `;
     } catch {
-      document.getElementById("leetcode-stats").innerText = "Failed to fetch LeetCode data.";
+      document.getElementById("leetcode-stats").innerHTML = `<p class="centered-error">Failed to fetch LeetCode data.</p>`;
     }
   }
   fetchLeetCodeStats(leetcodeUsername);
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
       aboutText.textContent = data.about;
     })
     .catch(() => {
-      document.getElementById('about-text').textContent = "Unable to load About section at this time.";
+      document.getElementById('about-text').innerHTML = `<span class="centered-error">Unable to load About section at this time.</span>`;
     });
 
   // Animate on scroll
