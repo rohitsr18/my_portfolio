@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Project slider controls
   const slider = document.getElementById('projects-slider');
   const btnLeft = document.querySelector('.slider-btn.left');
   const btnRight = document.querySelector('.slider-btn.right');
-  const username = 'rohitsr18'; // Replace this
+  const username = 'rohitsr18';
 
   btnLeft.addEventListener('click', () => {
     slider.scrollBy({ left: -300, behavior: 'smooth' });
@@ -12,13 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
     slider.scrollBy({ left: 300, behavior: 'smooth' });
   });
 
+  // Fetch GitHub repos
   async function fetchRepos() {
     try {
       const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
       if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
       const repos = await res.json();
-
-      // Filter repos with at least 1 star
       const popularRepos = repos.filter(repo => repo.stargazers_count >= 1);
 
       if (popularRepos.length === 0) {
@@ -26,28 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      slider.innerHTML = ''; // Clear loading message
+      slider.innerHTML = '';
 
       popularRepos.forEach(repo => {
         const projectCard = document.createElement('div');
         projectCard.className = 'project-card';
         projectCard.innerHTML = `
-        <h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
-        <p>${repo.description || 'No description'}</p>
-        <div class="stars">⭐ ${repo.stargazers_count}</div>
-      `;
+          <h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
+          <p>${repo.description || 'No description'}</p>
+          <div class="stars">⭐ ${repo.stargazers_count}</div>
+        `;
         slider.appendChild(projectCard);
       });
     } catch (err) {
       slider.innerHTML = `<p>Error fetching projects: ${err.message}</p>`;
     }
   }
-
   fetchRepos();
 
-
+  // Fetch LeetCode stats
   const leetcodeUsername = "rohitsr18";
-
   async function fetchLeetCodeStats(username) {
     try {
       const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
@@ -60,34 +58,57 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       document.getElementById("leetcode-stats").innerHTML = `
-      <a href="https://leetcode.com/${username}" target="_blank" class="leetcode-card-link">
-      <h3>LeetCode</h3>
-      <p>User: <strong>${username}</strong></p>
-      <p>Total Problems Solved: <strong>${data.totalSolved}</strong></p>
-      <p>Ranking: <strong>${data.ranking}</strong></p>
-      <p>Acceptance Rate: <strong>${data.acceptanceRate}</strong></p>
-      <p class="click-note">Click to view full profile</p>
-  </a>
-
-    `;
-    } catch (error) {
+        <a href="https://leetcode.com/${username}" target="_blank" class="leetcode-card-link">
+          <h3>LeetCode</h3>
+          <p>User: <strong>${username}</strong></p>
+          <p>Total Problems Solved: <strong>${data.totalSolved}</strong></p>
+          <p>Ranking: <strong>${data.ranking}</strong></p>
+          <p>Acceptance Rate: <strong>${data.acceptanceRate}</strong></p>
+          <p class="click-note">Click to view full profile</p>
+        </a>
+      `;
+    } catch {
       document.getElementById("leetcode-stats").innerText = "Failed to fetch LeetCode data.";
-      console.error(error);
     }
   }
-
   fetchLeetCodeStats(leetcodeUsername);
 
+  // Fetch About section
   fetch('about.json')
     .then(response => response.json())
     .then(data => {
       const aboutText = document.getElementById('about-text');
       aboutText.textContent = data.about;
     })
-    .catch(error => {
-      console.error("Error loading About section:", error);
+    .catch(() => {
       document.getElementById('about-text').textContent = "Unable to load About section at this time.";
     });
+
+  // Animate on scroll
+  function animateOnScroll() {
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', animateOnScroll);
+  animateOnScroll();
+
+  // Hamburger menu
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    hamburger.classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('open');
+    });
+  });
 });
 
 window.addEventListener("scroll", () => {
@@ -116,19 +137,4 @@ window.addEventListener("scroll", () => {
 
   window.addEventListener('scroll', animateOnScroll);
   window.addEventListener('DOMContentLoaded', animateOnScroll);
-});
-
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  hamburger.classList.toggle('open');
-});
-
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    hamburger.classList.remove('open');
-  });
 });

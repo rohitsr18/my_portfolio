@@ -127,18 +127,7 @@ nav {
   font-size: 1.2rem;
 }
 
-.hero-text .btn {
-  margin-top: 2rem;
-  padding: 0.75rem 1.5rem;
-  background: #61dafb;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-}
-
+.hero-text .btn,
 .btn {
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
@@ -305,7 +294,7 @@ footer {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 0.8rem;
-  padding: 1.2rem 0.5;
+  padding: 1.2rem 0.5rem;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
@@ -477,6 +466,7 @@ footer {
   height: 100%;
   border: none;
 }
+
 @media (max-width: 500px) {
   .contact-details {
     padding: 1.5rem;
