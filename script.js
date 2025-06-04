@@ -148,6 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
       hamburger.classList.remove('open');
     });
   });
+
+  // Refresh page when logo is clicked
+  const logo = document.querySelector('.logo');
+  if (logo) {
+    logo.addEventListener('click', () => {
+      window.location.reload();
+    });
+  }
 });
 
 window.addEventListener("scroll", () => {
