@@ -32,7 +32,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
       slider.innerHTML = '';
 
-      starredRepos.forEach(repo => {
+      // Fetch commit counts for each repo in parallel (only by the repo owner)
+      const commitPromises = starredRepos.map(async repo => {
+        // Get commits authored by the repo owner (your username)
+        const commitsUrl = `https://api.github.com/repos/${username}/${repo.name}/commits?author=${username}&per_page=1`;
+        const commitsRes = await fetch(commitsUrl);
+        if (!commitsRes.ok) return { repo, commits: 'N/A' };
+
+        // Get the total count from the 'link' header if paginated, else count the single commit
+        const linkHeader = commitsRes.headers.get('Link');
+        if (linkHeader) {
+          // Extract the last page number from the link header
+          const match = linkHeader.match(/&page=(\d+)>; rel="last"/);
+          return { repo, commits: match ? match[1] : 'N/A' };
+        } else {
+          // Only one page, so count the commits in the response
+          const commits = await commitsRes.json();
+          return { repo, commits: Array.isArray(commits) ? commits.length : 'N/A' };
+        }
+      });
+
+      const reposWithCommits = await Promise.all(commitPromises);
+
+      reposWithCommits.forEach(({ repo, commits }) => {
         const projectCard = document.createElement('div');
         projectCard.className = 'project-card';
         projectCard.innerHTML = `
@@ -40,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p>${repo.description ? escapeHTML(repo.description) : 'No description'}</p>
           <div class="stars">⭐ ${repo.stargazers_count}</div>
           <div class="last-commit">Last commit: ${new Date(repo.pushed_at).toLocaleDateString()}</div>
+          <div class="commit-count">Your commits: ${commits}</div>
         `;
         slider.appendChild(projectCard);
       });
