@@ -462,8 +462,8 @@ footer {
   width: 100%;
   padding-top: 130%;
   overflow: hidden;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
 }
 
 .responsive-iframe-container iframe {
