@@ -57,11 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
       reposWithCommits.forEach(({ repo, commits }) => {
         const projectCard = document.createElement('div');
         projectCard.className = 'project-card';
+
+        // Format last commit date as dd/mm/yyyy
+        const pushedDate = new Date(repo.pushed_at);
+        const day = String(pushedDate.getDate()).padStart(2, '0');
+        const month = String(pushedDate.getMonth() + 1).padStart(2, '0');
+        const year = pushedDate.getFullYear();
+        const formattedDate = `${day}/${month}/${year}`;
+
         projectCard.innerHTML = `
           <h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${escapeHTML(repo.name)}</a></h3>
           <p>${repo.description ? escapeHTML(repo.description) : 'No description'}</p>
           <div class="stars">⭐ ${repo.stargazers_count}</div>
-          <div class="last-commit">Last commit: ${new Date(repo.pushed_at).toLocaleDateString()}</div>
+          <div class="last-commit">Last commit: ${formattedDate}</div>
           <div class="commit-count">Your commits: ${commits}</div>
         `;
         slider.appendChild(projectCard);
