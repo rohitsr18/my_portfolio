@@ -30,12 +30,40 @@ nav {
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
+  letter-spacing: 2px;
+  color: #fff;
+  background: linear-gradient(90deg, #1976d2 40%, #00bcd4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  cursor: pointer;
+  transition: transform 0.18s, text-shadow 0.18s;
+  text-shadow: 0 2px 12px rgba(25, 118, 210, 0.12);
 }
 
 .logo span {
   color: #61dafb;
+  font-size: 1.3em;
+  margin-left: 0.2em;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(97, 218, 251, 0.18);
+  transition: color 0.2s;
+}
+
+.logo:hover {
+  transform: scale(1.07) rotate(-2deg);
+  text-shadow: 0 6px 24px #00bcd4, 0 2px 12px #1976d2;
+}
+
+.logo:hover span {
+  color: #00bcd4;
 }
 
 .nav-links {
@@ -162,15 +190,35 @@ nav {
 .skills-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.2rem;
+  justify-content: center;
   list-style: none;
-  margin-top: 1rem;
+  padding: 0;
+  margin: 2rem 0 0 0;
 }
 
 .skills-list li {
-  background: #d1d1f0;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  background: #f5f7fa;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.skills-list li:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  background: #e3f2fd;
+}
+
+.skill-icon {
+  font-size: 1.5em;
+  margin-right: 0.7em;
+  color: #1976d2;
 }
 
 .contact-section {
@@ -239,7 +287,7 @@ nav {
 footer {
   text-align: center;
   padding: 2rem;
-  background: #f1f1f1;
+  background: #d5e9ec;
 }
 
 #about p {
@@ -270,13 +318,15 @@ footer {
 
 .profile-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0,188,212,0.35), 0 2px 8px rgba(25, 118, 210, 0.10);
+  /* Main shadow is now cyan/teal, secondary blue for depth */
+  background: #e3f2fd;
 }
 
 .profile-card h3 {
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
-  color: #222;
+  color: #4dafe7;
 }
 
 .profile-card a {
@@ -404,8 +454,12 @@ footer {
 }
 
 #about-text {
-  text-align: left;
+  font-family: 'Fira Code', 'Consolas', 'Menlo', 'Monaco', monospace;
+  font-size: 0.8rem;
+  color: #222;
+  line-height: 1.7;
   margin-left: 0;
+  text-align: left;
 }
 
 .centered-error {
@@ -414,6 +468,92 @@ footer {
   font-weight: bold;
   margin: 2rem auto;
   display: block;
+}
+
+/* Attractive section headings */
+.section h2,
+#profiles h2,
+#contact h2 {
+  font-family: 'Fira Code', monospace;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1976d2;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(90deg, #1976d2 40%, #00bcd4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section h2::after,
+#profiles h2::after,
+#contact h2::after {
+  content: '';
+  display: block;
+  margin: 0.5rem auto 0 auto;
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #1976d2 40%, #00bcd4 100%);
+  opacity: 0.5;
+}
+
+/* Attractive resume section */
+#resume.section {
+  background: linear-gradient(120deg, #e3f2fd 60%, #f8fafc 100%);
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(25, 118, 210, 0.08);
+  padding: 2rem 0.5rem 2.5rem 0.5rem;
+  margin: 2rem auto 1.5rem auto;
+  max-width: 600px;
+}
+
+#resume h2 {
+  margin-bottom: 1.2rem;
+}
+
+.responsive-iframe-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  aspect-ratio: 8.5/11;
+  overflow: hidden;
+  border: 2px solid #1976d2;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(25, 118, 210, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 350px;
+}
+
+.responsive-iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  border-radius: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  #resume.section {
+    padding: 1.2rem 0.1rem 1.5rem 0.1rem;
+    max-width: 98vw;
+  }
+  .responsive-iframe-container {
+    max-width: 98vw;
+    min-height: 220px;
+    border-width: 1px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -460,27 +600,20 @@ footer {
 .responsive-iframe-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  margin: 1rem auto;
-  aspect-ratio: 8.5/11; /* Standard resume ratio */
+  padding-top: 130%;
+  max-width: 800px;
   overflow: hidden;
   border: 2px solid #ccc;
   border-radius: 12px;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .responsive-iframe-container iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-  margin: 0 auto;
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 @media (max-width: 500px) {
