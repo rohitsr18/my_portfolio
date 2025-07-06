@@ -220,7 +220,7 @@ a.btn-explore:hover {
 }
 
 .section {
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   max-width: 1000px;
   margin: auto;
 }
@@ -295,14 +295,14 @@ a.btn-explore:hover {
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   color: #333;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.8;
   box-sizing: border-box;
 }
 
 .contact-details p {
   width: 100%;
-  margin: 0.75rem 0;
+  margin: 0.5rem 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
