@@ -193,12 +193,3 @@ window.addEventListener("scroll", () => {
   window.addEventListener('scroll', animateOnScroll);
   window.addEventListener('DOMContentLoaded', animateOnScroll);
 });
-
-/* #about-text {
-  font-family: 'Fira Code', 'Consolas', 'Menlo', 'Monaco', monospace;
-  font-size: 1.13rem;
-  color: #222;
-  line-height: 1.7;
-  margin-left: 0;
-  text-align: left;
-} */
