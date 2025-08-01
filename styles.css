@@ -514,28 +514,13 @@ footer {
   border: 2px solid #ffa11633;
   border-radius: 14px;
   box-shadow: 0 4px 18px rgba(255, 161, 22, 0.10);
-  padding: 1.2rem 1rem 1rem 1rem;
+  padding: .8rem .8rem .8rem .8rem;
   max-width: none;
   width: 100%;
-  height: 250px; /* Default height for desktop */
   margin: 2rem 0 1.5rem 0;
   transition: box-shadow 0.2s, transform 0.2s, height 0.2s;
   text-align: center;
   box-sizing: border-box;
-}
-
-@media (max-width: 900px) {
-  .leetcode-card {
-    height: 260px;
-  }
-}
-
-@media (max-width: 600px) {
-  .leetcode-card {
-    height: auto;
-    max-width: 100%;
-    padding: 1rem 0.5rem 1rem 0.5rem;
-  }
 }
 
 .leetcode-card:hover {
