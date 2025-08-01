@@ -106,7 +106,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.getElementById("leetcode-stats").innerHTML = `
         <a href="https://leetcode.com/${escapeHTML(username)}" target="_blank" class="leetcode-card-link" rel="noopener noreferrer">
-          <h3>LeetCode</h3>
+          <h3>
+            <span style="vertical-align: middle; margin-right: 0.5em;">
+              <!-- Official LeetCode SVG Icon -->
+              <svg width="24" height="24" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
+                <g>
+                  <path d="M41.5 36.2c-1.1 0-2.1-0.4-2.9-1.2l-13.2-13.2c-1.6-1.6-1.6-4.2 0-5.8l13.2-13.2c1.6-1.6 4.2-1.6 5.8 0s1.6 4.2 0 5.8L35.1 25l9.3 9.3c1.6 1.6 1.6 4.2 0 5.8-0.8 0.8-1.8 1.1-2.9 1.1z" fill="#FFA116"/>
+                  <path d="M8.5 36.2c-1.1 0-2.1-0.4-2.9-1.2-1.6-1.6-1.6-4.2 0-5.8L14.9 25l-9.3-9.3c-1.6-1.6-1.6-4.2 0-5.8s4.2-1.6 5.8 0l13.2 13.2c1.6 1.6 1.6 4.2 0 5.8L11.3 35c-0.8 0.8-1.8 1.2-2.8 1.2z" fill="#292D3D"/>
+                </g>
+              </svg>
+            </span>
+            LeetCode
+          </h3>
           <p>User: <strong>${escapeHTML(username)}</strong></p>
           <p>Total Problems Solved: <strong>${escapeHTML(data.totalSolved)}</strong></p>
           <p>Ranking: <strong>${escapeHTML(data.ranking)}</strong></p>

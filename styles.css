@@ -298,6 +298,13 @@ a.btn-explore:hover {
   font-size: 1rem;
   line-height: 1.8;
   box-sizing: border-box;
+  transition: box-shadow 0.25s, background 0.25s, transform 0.22s;
+}
+
+.contact-details:hover {
+  background: linear-gradient(120deg, #e3f2fd 60%, #f8fafc 100%);
+  box-shadow: 0 12px 32px rgba(25, 118, 210, 0.13);
+  transform: translateY(-4px) scale(1.02);
 }
 
 .contact-details p {
@@ -322,11 +329,18 @@ a.btn-explore:hover {
   word-break: break-word;
   flex: 1;
   transition: color 0.3s ease;
+  outline: none;
+  box-shadow: none;
 }
 
-.contact-details a:hover {
-  color: #005a99;
-  text-decoration: underline;
+.contact-details a:hover,
+.contact-details a:focus,
+.contact-details a:active,
+.contact-details a:visited {
+  color: #007acc;
+  text-decoration: none !important;
+  outline: none;
+  box-shadow: none;
 }
 
 .contact-icon {
@@ -493,6 +507,80 @@ footer {
   margin-top: 0.5rem;
   font-size: 0.85rem;
   color: #555;
+}
+
+.leetcode-card {
+  background: #fffbea;
+  border: 2px solid #ffa11633;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(255, 161, 22, 0.10);
+  padding: 1.2rem 1rem 1rem 1rem;
+  max-width: none;
+  width: 100%;
+  height: 250px; /* Default height for desktop */
+  margin: 2rem 0 1.5rem 0;
+  transition: box-shadow 0.2s, transform 0.2s, height 0.2s;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .leetcode-card {
+    height: 260px;
+  }
+}
+
+@media (max-width: 600px) {
+  .leetcode-card {
+    height: auto;
+    max-width: 100%;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+}
+
+.leetcode-card:hover {
+  box-shadow: 0 8px 32px #FFA11633, 0 2px 8px #292D3D22;
+  transform: translateY(-4px) scale(1.03);
+  background: linear-gradient(120deg, #fffbea 70%, #ffe0b2 100%);
+}
+
+.leetcode-card h3 {
+  font-family: 'Fira Code', 'Consolas', 'Menlo', 'Monaco', monospace;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #FFA116;
+  display: flex;
+  align-items: center;
+  gap: 0.18em;
+  background: linear-gradient(90deg, #FFA116 60%, #292D3D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.leetcode-card p {
+  font-family: 'Fira Code', 'Consolas', 'Menlo', 'Monaco', monospace;
+  font-size: 1.07rem;
+  color: #292D3D;
+  margin: 0.5rem 0;
+  line-height: 1.1;
+}
+
+.leetcode-card strong {
+  color: #FFA116;
+  font-weight: 700;
+}
+
+.leetcode-card .click-note {
+  font-size: 0.95rem;
+  color: #888;
+  margin-top: 1.1rem;
+  font-style: italic;
+  letter-spacing: 0.5px;
 }
 
 #resume h2,
