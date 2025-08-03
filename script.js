@@ -91,45 +91,111 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetchRepos();
 
-  // Fetch LeetCode stats
-  const leetcodeUsername = "rohitsr18";
-  async function fetchLeetCodeStats(username) {
-    try {
-      const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
-      if (!response.ok) throw new Error("Network response was not ok");
-      const data = await response.json();
+  // Create LeetCode card in JS
+  const profilesSection = document.getElementById('profiles');
+  if (profilesSection) {
+    // LeetCode Card
+    const leetcodeCard = document.createElement('div');
+    leetcodeCard.className = 'profile-card leetcode-card';
+    leetcodeCard.innerHTML = `
+      <a href="https://leetcode.com/rohitsr18" target="_blank" class="leetcode-card-link" rel="noopener noreferrer">
+        <h3>
+          <span style="vertical-align: middle; margin-right: 0.18em;">
+            <!-- LeetCode SVG Icon -->
+            <svg width="24" height="24" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
+              <g>
+                <path d="M41.5 36.2c-1.1 0-2.1-0.4-2.9-1.2l-13.2-13.2c-1.6-1.6-1.6-4.2 0-5.8l13.2-13.2c1.6-1.6 4.2-1.6 5.8 0s1.6 4.2 0 5.8L35.1 25l9.3 9.3c1.6 1.6 1.6 4.2 0 5.8-0.8 0.8-1.8 1.1-2.9 1.1z" fill="#FFA116"/>
+                <path d="M8.5 36.2c-1.1 0-2.1-0.4-2.9-1.2-1.6-1.6-1.6-4.2 0-5.8L14.9 25l-9.3-9.3c-1.6-1.6-1.6-4.2 0-5.8s4.2-1.6 5.8 0l13.2 13.2c1.6 1.6 1.6 4.2 0 5.8L11.3 35c-0.8 0.8-1.8 1.2-2.8 1.2z" fill="#292D3D"/>
+              </g>
+            </svg>
+          </span>
+          LeetCode
+        </h3>
+        <p>User: <strong>rohitsr18</strong></p>
+        <p id="leetcode-problems"></p>
+        <p id="leetcode-rank"></p>
+        <p id="leetcode-acceptance"></p>
+        <p class="click-note">Click to view full profile</p>
+      </a>
+    `;
+    // Insert as first card in profiles-horizontal
+    const profilesRow = document.querySelector('.profiles-horizontal');
+    if (profilesRow) profilesRow.insertBefore(leetcodeCard, profilesRow.firstChild);
 
-      if (data.status === "error") {
-        document.getElementById("leetcode-stats").innerHTML = `<p class="centered-error">LeetCode profile not found or API error.</p>`;
-        return;
-      }
+    // Fetch LeetCode stats
+    fetch('https://leetcode-stats-api.herokuapp.com/rohitsr18')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('leetcode-problems').innerHTML =
+          `Total Problems Solved: <strong>${data.totalSolved ?? 'N/A'}</strong>`;
+        document.getElementById('leetcode-rank').innerHTML =
+          `Global Rank: <strong>${data.ranking ?? 'N/A'}</strong>`;
+        document.getElementById('leetcode-acceptance').innerHTML =
+          `Acceptance Rate: <strong>${data.acceptanceRate ?? 'N/A'}</strong>`;
+      })
+      .catch(() => {
+        document.getElementById('leetcode-problems').innerHTML = 'Total Problems Solved: <strong>N/A</strong>';
+        document.getElementById('leetcode-rank').innerHTML = 'Global Rank: <strong>N/A</strong>';
+        document.getElementById('leetcode-acceptance').innerHTML = 'Acceptance Rate: <strong>N/A</strong>';
+      });
 
-      document.getElementById("leetcode-stats").innerHTML = `
-        <a href="https://leetcode.com/${escapeHTML(username)}" target="_blank" class="leetcode-card-link" rel="noopener noreferrer">
-          <h3>
-            <span style="vertical-align: middle; margin-right: 0.5em;">
-              <!-- Official LeetCode SVG Icon -->
-              <svg width="24" height="24" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
-                <g>
-                  <path d="M41.5 36.2c-1.1 0-2.1-0.4-2.9-1.2l-13.2-13.2c-1.6-1.6-1.6-4.2 0-5.8l13.2-13.2c1.6-1.6 4.2-1.6 5.8 0s1.6 4.2 0 5.8L35.1 25l9.3 9.3c1.6 1.6 1.6 4.2 0 5.8-0.8 0.8-1.8 1.1-2.9 1.1z" fill="#FFA116"/>
-                  <path d="M8.5 36.2c-1.1 0-2.1-0.4-2.9-1.2-1.6-1.6-1.6-4.2 0-5.8L14.9 25l-9.3-9.3c-1.6-1.6-1.6-4.2 0-5.8s4.2-1.6 5.8 0l13.2 13.2c1.6 1.6 1.6 4.2 0 5.8L11.3 35c-0.8 0.8-1.8 1.2-2.8 1.2z" fill="#292D3D"/>
-                </g>
-              </svg>
-            </span>
-            LeetCode
-          </h3>
-          <p>User: <strong>${escapeHTML(username)}</strong></p>
-          <p>Total Problems Solved: <strong>${escapeHTML(data.totalSolved)}</strong></p>
-          <p>Ranking: <strong>${escapeHTML(data.ranking)}</strong></p>
-          <p>Acceptance Rate: <strong>${escapeHTML(data.acceptanceRate)}</strong></p>
-          <p class="click-note">Click to view full profile</p>
-        </a>
-      `;
-    } catch {
-      document.getElementById("leetcode-stats").innerHTML = `<p class="centered-error">Failed to fetch LeetCode data.</p>`;
-    }
+    // CodeChef Card
+    const codechefCard = document.createElement('div');
+    codechefCard.className = 'profile-card codechef-card';
+    codechefCard.innerHTML = `
+      <a href="https://www.codechef.com/users/rohitsr18" target="_blank" class="codechef-card-link" rel="noopener noreferrer">
+        <h3>
+      <span style="vertical-align: middle; margin-right: 0.18em;">
+        <!-- Official CodeChef Logo SVG -->
+        <svg width="140" height="44" viewBox="0 0 258 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
+          <g>
+            <ellipse cx="38" cy="25" rx="18" ry="12" fill="#F5E6C8"/>
+            <ellipse cx="38" cy="15" rx="10" ry="7" fill="#F5E6C8"/>
+            <ellipse cx="38" cy="40" rx="14" ry="10" fill="#fff"/>
+            <ellipse cx="33" cy="40" rx="3" ry="2" fill="#5B4636"/>
+            <ellipse cx="43" cy="40" rx="3" ry="2" fill="#5B4636"/>
+            <path d="M34 45 Q38 48 42 45" stroke="#5B4636" stroke-width="2" fill="none"/>
+            <ellipse cx="33" cy="43" rx="3" ry="1.5" fill="#5B4636"/>
+            <ellipse cx="43" cy="43" rx="3" ry="1.5" fill="#5B4636"/>
+            <rect x="55" y="25" width="180" height="30" rx="12" fill="url(#brown-gradient)"/>
+            <text x="65" y="48" font-family="Arial, sans-serif" font-size="24" fill="#fff" font-weight="bold">CODECHEF</text>
+            <defs>
+              <linearGradient id="brown-gradient" x1="55" y1="25" x2="235" y2="55" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#5B4636"/>
+                <stop offset="1" stop-color="#A97C50"/>
+              </linearGradient>
+            </defs>
+          </g>
+        </svg>
+      </span>
+    </h3>
+        <p>User: <strong>rohitsr18</strong></p>
+        <p id="codechef-problems"></p>
+        <p id="codechef-rank"></p>
+        <p id="codechef-rating"></p>
+        <p class="click-note">Click to view full profile</p>
+      </a>
+    `;
+    // Insert after LeetCode card
+    if (profilesRow) profilesRow.insertBefore(codechefCard, leetcodeCard.nextSibling);
+
+    // Fetch CodeChef stats
+    fetch('https://codechef-api.vercel.app/user/rohitsr18')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('codechef-problems').innerHTML =
+          `Total Problems Solved: <strong>${data.fullySolved?.count ?? 'N/A'}</strong>`;
+        document.getElementById('codechef-rating').innerHTML =
+          `Rating: <strong>${data.rating ?? 'N/A'}</strong> | Stars: <strong>${data.stars ?? 'N/A'}</strong>`;
+        document.getElementById('codechef-rank').innerHTML =
+          `Global Rank: <strong>${data.globalRank ?? 'N/A'}</strong>`;
+      })
+      .catch(() => {
+        document.getElementById('codechef-problems').innerHTML = 'Total Problems Solved: <strong>N/A</strong>';
+        document.getElementById('codechef-rating').innerHTML = 'Rating: <strong>N/A</strong> | Stars: <strong>N/A</strong>';
+        document.getElementById('codechef-rank').innerHTML = 'Global Rank: <strong>N/A</strong>';
+      });
   }
-  fetchLeetCodeStats(leetcodeUsername);
 
   // Fetch About section
   fetch('about.json')
