@@ -453,11 +453,11 @@ footer {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.codechef-card-link,
-.codechef-card-link:hover,
-.codechef-card-link:focus,
-.codechef-card-link:active,
-s .codechef-card-link:visited {
+.codeforces-card-link,
+.codeforces-card-link:hover,
+.codeforces-card-link:focus,
+.codeforces-card-link:active,
+s .codeforces-card-link:visited {
   display: block;
   color: inherit;
   text-decoration: none;

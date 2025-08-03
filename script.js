@@ -139,62 +139,101 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('leetcode-acceptance').innerHTML = 'Acceptance Rate: <strong>N/A</strong>';
       });
 
-    // CodeChef Card
-    const codechefCard = document.createElement('div');
-    codechefCard.className = 'profile-card codechef-card';
-    codechefCard.innerHTML = `
-      <a href="https://www.codechef.com/users/rohitsr18" target="_blank" class="codechef-card-link" rel="noopener noreferrer">
+    // CodeForces Card
+    const codeforcesCard = document.createElement('div');
+    codeforcesCard.className = 'profile-card codeforces-card';
+    const cfUsername = 'rohitsr24';
+    codeforcesCard.innerHTML = `
+      <a href="https://codeforces.com/profile/${cfUsername}" target="_blank" class="codeforces-card-link" rel="noopener noreferrer">
         <h3>
-      <span style="vertical-align: middle; margin-right: 0.18em;">
-        <!-- Official CodeChef Logo SVG -->
-        <svg width="140" height="44" viewBox="0 0 258 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
-          <g>
-            <ellipse cx="38" cy="25" rx="18" ry="12" fill="#F5E6C8"/>
-            <ellipse cx="38" cy="15" rx="10" ry="7" fill="#F5E6C8"/>
-            <ellipse cx="38" cy="40" rx="14" ry="10" fill="#fff"/>
-            <ellipse cx="33" cy="40" rx="3" ry="2" fill="#5B4636"/>
-            <ellipse cx="43" cy="40" rx="3" ry="2" fill="#5B4636"/>
-            <path d="M34 45 Q38 48 42 45" stroke="#5B4636" stroke-width="2" fill="none"/>
-            <ellipse cx="33" cy="43" rx="3" ry="1.5" fill="#5B4636"/>
-            <ellipse cx="43" cy="43" rx="3" ry="1.5" fill="#5B4636"/>
-            <rect x="55" y="25" width="180" height="30" rx="12" fill="url(#brown-gradient)"/>
-            <text x="65" y="48" font-family="Arial, sans-serif" font-size="24" fill="#fff" font-weight="bold">CODECHEF</text>
-            <defs>
-              <linearGradient id="brown-gradient" x1="55" y1="25" x2="235" y2="55" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#5B4636"/>
-                <stop offset="1" stop-color="#A97C50"/>
-              </linearGradient>
-            </defs>
-          </g>
-        </svg>
-      </span>
-    </h3>
-        <p>User: <strong>rohitsr18</strong></p>
-        <p id="codechef-problems"></p>
-        <p id="codechef-rank"></p>
-        <p id="codechef-rating"></p>
+          <span style="vertical-align: middle; margin-right: 0.5em;">
+            <!-- CodeForces SVG Icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
+              <rect x="4" y="6" width="4" height="12" fill="#F44336"/>
+              <rect x="10" y="6" width="4" height="12" fill="#2196F3"/>
+              <rect x="16" y="6" width="4" height="12" fill="#F44336"/>
+            </svg>
+          </span>
+          CODEFORCES
+        </h3>
+        <p>User: <strong>${cfUsername}</strong></p>
+        <p id="codeforces-solved"></p>
+        <p id="codeforces-rank-rating"></p>
+        <p id="codeforces-max-rank-rating"></p>
         <p class="click-note">Click to view full profile</p>
       </a>
     `;
     // Insert after LeetCode card
-    if (profilesRow) profilesRow.insertBefore(codechefCard, leetcodeCard.nextSibling);
+    if (profilesRow) profilesRow.insertBefore(codeforcesCard, leetcodeCard.nextSibling);
 
-    // Fetch CodeChef stats
-    fetch('https://codechef-api.vercel.app/user/rohitsr18')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('codechef-problems').innerHTML =
-          `Total Problems Solved: <strong>${data.fullySolved?.count ?? 'N/A'}</strong>`;
-        document.getElementById('codechef-rating').innerHTML =
-          `Rating: <strong>${data.rating ?? 'N/A'}</strong> | Stars: <strong>${data.stars ?? 'N/A'}</strong>`;
-        document.getElementById('codechef-rank').innerHTML =
-          `Global Rank: <strong>${data.globalRank ?? 'N/A'}</strong>`;
-      })
-      .catch(() => {
-        document.getElementById('codechef-problems').innerHTML = 'Total Problems Solved: <strong>N/A</strong>';
-        document.getElementById('codechef-rating').innerHTML = 'Rating: <strong>N/A</strong> | Stars: <strong>N/A</strong>';
-        document.getElementById('codechef-rank').innerHTML = 'Global Rank: <strong>N/A</strong>';
-      });
+    // Fetch CodeForces stats
+    const userInfoUrl = `https://codeforces.com/api/user.info?handles=${cfUsername}`;
+    const userStatusUrl = `https://codeforces.com/api/user.status?handle=${cfUsername}`;
+
+    // Helper to get CodeForces rank color
+    const getCodeforcesColor = (rating) => {
+      if (rating === null || rating === undefined) return '#000000'; // Black for unrated
+      if (rating < 1200) return '#808080'; // Gray
+      if (rating < 1400) return '#008000'; // Green
+      if (rating < 1600) return '#03A89E'; // Cyan
+      if (rating < 1900) return '#0000FF'; // Blue
+      if (rating < 2100) return '#AA00AA'; // Violet
+      if (rating < 2400) return '#FF8C00'; // Orange
+      if (rating < 3000) return '#FF0000'; // Red
+      return '#FF0000'; // Red for LGM
+    };
+
+    // Helper to capitalize strings
+    const capitalize = (str) => {
+      if (!str) return '';
+      return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    };
+
+    const fetchJson = (url, context) => fetch(url).then(res => {
+      if (!res.ok) throw new Error(`CodeForces ${context} API error: ${res.status}`);
+      return res.json();
+    });
+
+    Promise.all([
+      fetchJson(userInfoUrl, 'userInfo'),
+      fetchJson(userStatusUrl, 'userStatus')
+    ]).then(([infoData, statusData]) => {
+      // Process user info for rating and rank
+      if (infoData.status !== 'OK') throw new Error(`CodeForces userInfo response: ${infoData.comment}`);
+      const user = infoData.result[0];
+
+      const rankEl = document.getElementById('codeforces-rank-rating');
+      const maxRankEl = document.getElementById('codeforces-max-rank-rating');
+
+      if (user.rating) {
+        const color = getCodeforcesColor(user.rating);
+        const rank = capitalize(user.rank);
+
+        if (rank.toLowerCase().includes('legendary')) {
+          const styledRank = `<span style="color: black;">${rank.charAt(0)}</span><span style="color: red;">${rank.slice(1)}</span>`;
+          rankEl.innerHTML = `${styledRank} <strong style="color: ${color};">${user.rating}</strong>`;
+        } else {
+          rankEl.innerHTML = `<span style="font-weight: bold; color: ${color};">${rank}</span> <strong style="color: ${color};">${user.rating}</strong>`;
+        }
+
+        const maxColor = getCodeforcesColor(user.maxRating);
+        const maxRank = capitalize(user.maxRank);
+        maxRankEl.innerHTML = `Max: <span style="font-weight: bold; color: ${maxColor};">${maxRank}</span> <strong style="color: ${maxColor};">${user.maxRating}</strong>`;
+      } else {
+        rankEl.innerHTML = '<strong>Unrated</strong>';
+        maxRankEl.innerHTML = '';
+      }
+
+      // Process user status for solved problems
+      if (statusData.status !== 'OK') throw new Error(`CodeForces userStatus response: ${statusData.comment}`);
+      const solvedProblems = new Set(statusData.result.filter(s => s.verdict === 'OK').map(s => `${s.problem.contestId}-${s.problem.index}`));
+      document.getElementById('codeforces-solved').innerHTML = `Total Problems Solved: <strong>${solvedProblems.size}</strong>`;
+    }).catch((err) => {
+      console.error('Error fetching CodeForces stats:', err);
+      document.getElementById('codeforces-solved').innerHTML = 'Total Problems Solved: <strong>N/A</strong>';
+      document.getElementById('codeforces-rank-rating').innerHTML = 'Rank & Rating: <strong>N/A</strong>';
+      document.getElementById('codeforces-max-rank-rating').innerHTML = '';
+    });
   }
 
   // Fetch About section
