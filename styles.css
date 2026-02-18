@@ -276,6 +276,13 @@ a.btn-explore:hover {
   color: #1976d2;
 }
 
+img.skill-icon {
+  width: 1.5em;
+  height: 1.5em;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
 .contact-section {
   background: linear-gradient(to right, #f5f7fa, #c3cfe2);
   padding: 4rem 1rem;
